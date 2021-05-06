@@ -8,6 +8,7 @@ using Persistence;
 
 namespace API.Controllers
 {
+    // http://localhost:5000/api/v1/activities/
     public class ActivitiesController : BaseApiController
     {
         private readonly DataContext _context;
