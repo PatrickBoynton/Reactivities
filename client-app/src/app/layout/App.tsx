@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { Container, Header, List } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { Activity } from '../models/activity';
 import NavBar from './NavBar';
 import ActivityDashboard from '../features/activities/dashboard/ActivityDashboard';

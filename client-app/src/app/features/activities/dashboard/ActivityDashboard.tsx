@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Grid, List } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Activity } from '../../../models/activity';
 import ActivityList from './ActivityList';
 
