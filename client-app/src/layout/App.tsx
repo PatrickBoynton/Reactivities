@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import axios, { AxiosResponse } from 'axios';
 import { Header, List } from 'semantic-ui-react';
 
