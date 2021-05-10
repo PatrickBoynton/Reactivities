@@ -23,10 +23,13 @@ namespace API.Controllers
             Ok(await Mediator.Send(new Create.Command {Activity = activity}));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateActivities(Guid id, Activity activity)
+        public async Task<IActionResult> UpdateActivity(Guid id, Activity activity)
         {
             activity.Id = activity.Id;
             return Ok(Mediator.Send(new Edit.Command {Activity = activity}));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActivity(Guid id) => Ok(await Mediator.Send(new Delete.Command {Id = id}));
     }
 }
