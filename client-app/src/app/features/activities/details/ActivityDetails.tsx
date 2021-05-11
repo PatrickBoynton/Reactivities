@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import { Activity } from '../../../models/activity';
 
@@ -6,7 +6,7 @@ interface Props {
     activity: Activity;
 }
 
-function ActivityDetails({activity}: Props) {
+function ActivityDetails({activity}: Props): ReactElement {
     return (
         <Card fluid>
             <Image src={`/assets/categoryImages/${activity.category}.jpg`} alt='Category'/>
