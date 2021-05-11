@@ -4,28 +4,29 @@ import { Activity } from '../../../models/activity';
 
 interface Props {
     activity: Activity;
+    handleCancelActivity: () => void;
 }
 
-function ActivityDetails({activity}: Props): ReactElement {
+function ActivityDetails({activity, handleCancelActivity}: Props): ReactElement {
     return (
         <Card fluid>
-            <Image src={`/assets/categoryImages/${activity.category}.jpg`} alt='Category'/>
+            <Image src={ `/assets/categoryImages/${ activity.category }.jpg` } alt="Category"/>
 
             <Card.Content>
                 <Card.Header>
-                    {activity.title}
+                    { activity.title }
                 </Card.Header>
                 <Card.Meta>
-                    {activity.date}
+                    { activity.date }
                 </Card.Meta>
                 <Card.Description>
-                    {activity.description}
+                    { activity.description }
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button.Group widths='2'>
-                    <Button basic color='blue' content='Edit'/>
-                    <Button basic color='grey' content='Cancel'/>
+                <Button.Group widths="2">
+                    <Button basic color="blue" content="Edit"/>
+                    <Button onClick={handleCancelActivity} basic color="grey" content="Cancel"/>
                 </Button.Group>
             </Card.Content>
         </Card>
