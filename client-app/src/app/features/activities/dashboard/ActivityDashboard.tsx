@@ -14,6 +14,7 @@ interface Props {
     openForm: (id: string) => void;
     closeForm: () => void;
     editOrCreate: (activity: Activity) => void;
+    deleteActivity: (id: string) => void;
 }
 
 function ActivityDashboard({
@@ -24,13 +25,16 @@ function ActivityDashboard({
                                editMode,
                                openForm,
                                closeForm,
-                               editOrCreate
+                               editOrCreate,
+                               deleteActivity
                            }: Props): ReactElement {
     return (
         <Grid>
             <Grid.Column width="10">
                 <ActivityList activities={ activities }
-                              handleSelectActivity={ handleSelectActivity }/>
+                              handleSelectActivity={ handleSelectActivity }
+                              deleteActivity={ deleteActivity }
+                />
             </Grid.Column>
             <Grid.Column width="6">
                 { selectedActivity && !editMode &&
@@ -41,7 +45,7 @@ function ActivityDashboard({
                 { editMode &&
                 <ActivityForm closeForm={ closeForm }
                               activity={ selectedActivity }
-                              editOrCreate={editOrCreate}
+                              editOrCreate={ editOrCreate }
                 />
                 }
             </Grid.Column>
