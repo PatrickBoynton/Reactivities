@@ -1,7 +1,13 @@
 import React, { ReactElement } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import { Activity } from '../../../models/activity';
 
-function ActivityForm(): ReactElement {
+interface Props {
+    activity: Activity | undefined;
+    closeForm: () => void;
+}
+
+function ActivityForm({activity, closeForm}: Props): ReactElement {
     return (
         <Segment clearing>
             <Form>
@@ -11,8 +17,8 @@ function ActivityForm(): ReactElement {
                 <Form.Input placeholder="Date"/>
                 <Form.Input placeholder="City"/>
                 <Form.Input placeholder="Venue"/>
-                <Button positive floated='right' type='submit' content='Create Activity'/>
-                <Button positive floated='right' type='button' content='Cancel'/>
+                <Button basic positive floated='right' type='submit' content='Create Activity'/>
+                <Button onClick={closeForm} basic color='grey' floated='right' type='button' content='Cancel'/>
             </Form>
         </Segment>
     );
