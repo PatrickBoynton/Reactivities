@@ -5,9 +5,10 @@ import { Button, Item, Label, Segment } from 'semantic-ui-react';
 interface Props {
     activities: Activity[];
     handleSelectActivity: (id: string) => void;
+    deleteActivity: (id: string) => void;
 }
 
-function ActivityList({activities, handleSelectActivity}: Props): ReactElement {
+function ActivityList({activities, handleSelectActivity, deleteActivity}: Props): ReactElement {
     return (
         <Segment>
             <Item.Group divided>
@@ -26,6 +27,7 @@ function ActivityList({activities, handleSelectActivity}: Props): ReactElement {
                             </Item.Description>
                             <Item.Extra>
                                 <Button onClick={() => handleSelectActivity(activity.id)} floated='right' content='view' color='blue' />
+                                <Button onClick={() => deleteActivity(activity.id)} floated='right' content='delete' color='red' />
                                 <Label basic content={activity.category}/>
                             </Item.Extra>
                         </Item.Content>
