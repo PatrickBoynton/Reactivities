@@ -45,6 +45,10 @@ function App(): ReactElement {
         setSelectedActivity(activity);
     };
 
+    const handleDeleteActivity = (id: string): void => {
+        setActivities([...activities.filter(x => x.id !== id)])
+    }
+
     return (
         <>
             <NavBar openForm={ handleFormOpen }/>
@@ -57,6 +61,7 @@ function App(): ReactElement {
                                    openForm={ handleFormOpen }
                                    closeForm={ handleFormClose }
                                    editOrCreate={handleEditOrCreate}
+                                   deleteActivity={handleDeleteActivity}
                 />
             </Container>
         </>
