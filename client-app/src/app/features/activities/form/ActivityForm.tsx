@@ -5,9 +5,13 @@ import { Activity } from '../../../models/activity';
 interface Props {
     activity: Activity | undefined;
     closeForm: () => void;
+    editOrCreate: (activity: Activity) => void;
 }
 
-function ActivityForm({activity: selectedActivity, closeForm}: Props): ReactElement {
+function ActivityForm({
+                          activity: selectedActivity,
+                          closeForm,
+                          editOrCreate }: Props): ReactElement {
 
     const initialState = selectedActivity ?? {
         id: '',
@@ -23,7 +27,7 @@ function ActivityForm({activity: selectedActivity, closeForm}: Props): ReactElem
 
 
     const handleSubmit = (): void => {
-        console.log(activity);
+        editOrCreate(activity);
     };
 
     const handleInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -44,21 +48,21 @@ function ActivityForm({activity: selectedActivity, closeForm}: Props): ReactElem
                                name="description"
                                onChange={ handleInput }/>
                 <Form.Input placeholder="Category"
-                            value={activity.category}
+                            value={ activity.category }
                             name="category"
-                            onChange={handleInput}/>
+                            onChange={ handleInput }/>
                 <Form.Input placeholder="Date"
-                            value={activity.date}
+                            value={ activity.date }
                             name="date"
-                            onChange={handleInput}/>
+                            onChange={ handleInput }/>
                 <Form.Input placeholder="City"
-                            value={activity.city}
+                            value={ activity.city }
                             name="city"
-                            onChange={handleInput}/>
+                            onChange={ handleInput }/>
                 <Form.Input placeholder="Venue"
-                            value={activity.venue}
+                            value={ activity.venue }
                             name="venue"
-                            onChange={handleInput}/>
+                            onChange={ handleInput }/>
                 <Button basic positive floated="right" type="submit" content="Submit"/>
                 <Button onClick={ closeForm } basic color="grey" floated="right" type="button" content="Cancel"/>
             </Form>
