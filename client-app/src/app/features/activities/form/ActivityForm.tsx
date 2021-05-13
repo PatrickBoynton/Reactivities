@@ -52,6 +52,7 @@ function ActivityForm({
                             name="category"
                             onChange={ handleInput }/>
                 <Form.Input placeholder="Date"
+                            type="date"
                             value={ activity.date }
                             name="date"
                             onChange={ handleInput }/>
