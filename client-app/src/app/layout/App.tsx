@@ -64,7 +64,11 @@ function App(): ReactElement {
     };
 
     const handleDeleteActivity = (id: string): void => {
-        setActivities([...activities.filter(x => x.id !== id)]);
+        setSubmitting(true);
+        agent.Activities.delete(id).then(() => {
+            setActivities([...activities.filter(x => x.id !== id)]);
+        });
+        setSubmitting(false);
     };
 
     if (loading) return <LoadingComponent content="Loading app"/>;
@@ -82,7 +86,7 @@ function App(): ReactElement {
                                    closeForm={ handleFormClose }
                                    editOrCreate={ handleEditOrCreate }
                                    deleteActivity={ handleDeleteActivity }
-                                   submitting={submitting}
+                                   submitting={ submitting }
                 />
             </Container>
         </>
