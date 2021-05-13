@@ -1,19 +1,24 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
 import { Container } from 'semantic-ui-react';
 import { Activity } from '../models/activity';
 import NavBar from './NavBar';
 import ActivityDashboard from '../features/activities/dashboard/ActivityDashboard';
 import { v4 as uuid } from 'uuid';
+import agent from '../api/agent';
+
 function App(): ReactElement {
     const [activities, setActivities] = useState<Activity[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
     const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
-        axios.get<Activity[]>('http://localhost:5000/api/v1/activities/').then((response: AxiosResponse) => {
-            console.log(response);
-            setActivities(response.data);
+        agent.Activities.list().then((response) => {
+            let activities: Activity[] = [];
+            response.forEach(activity => {
+                activity.date = activity.date.split('T')[0];
+                activities.push(activity);
+            });
+            setActivities(activities);
         });
     }, []);
 
@@ -46,8 +51,8 @@ function App(): ReactElement {
     };
 
     const handleDeleteActivity = (id: string): void => {
-        setActivities([...activities.filter(x => x.id !== id)])
-    }
+        setActivities([...activities.filter(x => x.id !== id)]);
+    };
 
     return (
         <>
@@ -60,8 +65,8 @@ function App(): ReactElement {
                                    editMode={ editMode }
                                    openForm={ handleFormOpen }
                                    closeForm={ handleFormClose }
-                                   editOrCreate={handleEditOrCreate}
-                                   deleteActivity={handleDeleteActivity}
+                                   editOrCreate={ handleEditOrCreate }
+                                   deleteActivity={ handleDeleteActivity }
                 />
             </Container>
         </>
