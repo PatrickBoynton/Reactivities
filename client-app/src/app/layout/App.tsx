@@ -21,23 +21,6 @@ function App(): ReactElement {
         activityStore.loadActivities();
     }, [activityStore]);
 
-    const handleSelectedActivity = (id: string): void => {
-        setSelectedActivity(activities.find(activity => activity.id === id));
-    };
-
-    const handleCancelSelectedActivity = (): void => {
-        setSelectedActivity(undefined);
-    };
-
-    const handleFormOpen = (id?: string): void => {
-        id ? handleSelectedActivity(id) : handleCancelSelectedActivity();
-        setEditMode(true);
-    };
-
-    const handleFormClose = (): void => {
-        setEditMode(false);
-    };
-
     const handleEditOrCreate = (activity: Activity): void => {
         setSubmitting(true);
         if (activity.id) {
@@ -70,16 +53,10 @@ function App(): ReactElement {
 
     return (
         <>
-            <NavBar openForm={ handleFormOpen }/>
+            <NavBar />
             <Container style={ {marginTop: '7em'} }>
 
                 <ActivityDashboard activities={ activityStore.activities }
-                                   selectedActivity={ selectedActivity }
-                                   handleSelectActivity={ handleSelectedActivity }
-                                   handleCancelActivity={ handleCancelSelectedActivity }
-                                   editMode={ editMode }
-                                   openForm={ handleFormOpen }
-                                   closeForm={ handleFormClose }
                                    editOrCreate={ handleEditOrCreate }
                                    deleteActivity={ handleDeleteActivity }
                                    submitting={ submitting }
