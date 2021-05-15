@@ -13,7 +13,8 @@ function ActivityDashboard(): ReactElement {
     const {selectedActivity, editMode} = activityStore;
 
     useEffect(() => {
-        activityStore.loadActivities();
+        // Added the then to make my IDE happy. It's not really necessary.
+        activityStore.loadActivities().then(x => console.log(x));
     }, [activityStore]);
 
     if (activityStore.loadingInitial) return <LoadingComponent content="Loading app"/>;
