@@ -30,7 +30,7 @@ function ActivityList(): ReactElement {
                                 <div>{activity.city}, {activity.venue}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button as={Link} to={`activities/${activity.id}`} floated='right' content='view' color='blue' />
+                                <Button as={Link} to={`/activities/${activity.id}`} floated='right' content='view' color='blue' />
                                 <Button
                                     name={activity.id}
                                     loading={loading && target === activity.id}
