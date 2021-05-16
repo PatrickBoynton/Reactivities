@@ -15,13 +15,15 @@ export default class ActivityStore {
     }
 
     loadActivities = async (): Promise<void> => {
+        this.loadingInitial = true;
         try {
             const activities = await agent.Activities.list();
             runInAction(() => {
                 activities.forEach(activity => {
                     this.setActivity(activity);
+                    this.setLoadingInitial(false);
                 });
-                this.setLoadingInitial(false);
+
             });
         } catch (e) {
             console.log(e);
@@ -37,12 +39,12 @@ export default class ActivityStore {
             this.selectedActivity = activity;
         } else {
             this.loadingInitial = true;
-
             try {
                 activity = await agent.Activities.details(id);
                 this.setActivity(activity);
+                this.selectedActivity = activity;
                 this.setLoadingInitial(false);
-            }catch (e) {
+            } catch (e) {
                 console.log(e);
                 this.setLoadingInitial(false);
             }
@@ -52,7 +54,7 @@ export default class ActivityStore {
     private setActivity = (activity: Activity): void => {
         activity.date = activity.date.split('T')[0];
         this.activityRegistry.set(activity.id, activity);
-    }
+    };
 
     private getActivity = (id: string): Activity | undefined => {
         return this.activityRegistry.get(id);
