@@ -17,7 +17,7 @@ function App(): ReactElement {
                 <Route exact path='/' component={HomePage}/>
                 <Route exact path='/activities' component={ActivityDashboard}/>
                 <Route path='/activities/:id' component={ActivityDetails}/>
-                <Route path='/create' component={ActivityForm}/>
+                <Route path={ ['/create', '/manage/:id'] } component={ActivityForm}/>
             </Container>
         </>
     );
