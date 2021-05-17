@@ -8,11 +8,11 @@ import LoadingComponent from '../../../layout/LoadingComponent';
 function ActivityDashboard(): ReactElement {
 
     const {activityStore} = useStore();
+    const {loadActivities, activityRegistry} = activityStore;
 
     useEffect(() => {
-        // Added the then to make my IDE happy. It's not really necessary.
-        activityStore.loadActivities();
-    }, [activityStore]);
+        if (activityRegistry.size === 0) loadActivities();
+    }, [activityRegistry, loadActivities]);
 
     if (activityStore.loadingInitial) return <LoadingComponent content="Loading app"/>;
 
