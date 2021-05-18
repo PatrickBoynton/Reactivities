@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import { Card, Image, Button, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { useStore } from '../../../stores/store';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LoadingComponent from '../../../layout/LoadingComponent';
 import { observer } from 'mobx-react-lite';
 import ActivityDetailsHeader from './ActivityDetailsHeader';
