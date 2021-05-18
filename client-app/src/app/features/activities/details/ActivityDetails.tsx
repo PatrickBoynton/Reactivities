@@ -27,8 +27,8 @@ function ActivityDetails(): ReactElement {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <ActivityDetailsHeader/>
-                <ActivityDetailsInfo/>
+                <ActivityDetailsHeader activity={activity}/>
+                <ActivityDetailsInfo activity={activity}/>
                 <ActivityDetailsChat />
             </Grid.Column>
             <Grid.Column width={6}>
