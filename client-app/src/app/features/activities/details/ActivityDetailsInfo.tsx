@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react'
+import React, { ReactElement } from 'react';
 import {Segment, Grid, Icon} from 'semantic-ui-react'
 import {Activity} from '../../../models/activity';
 
@@ -7,7 +7,7 @@ interface Props {
     activity: Activity
 }
 
-function ActivityDetailsInfo({activity}: Props) {
+function ActivityDetailsInfo({activity}: Props): ReactElement {
     return (
         <Segment.Group>
             <Segment attached='top'>

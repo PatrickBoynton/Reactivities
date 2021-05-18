@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import React from 'react'
+import React, { ReactElement } from 'react';
 import {Segment, Header, Comment, Form, Button} from 'semantic-ui-react'
 
-function ActivityDetailsChat() {
+function ActivityDetailsChat(): ReactElement {
     return (
         <>
             <Segment

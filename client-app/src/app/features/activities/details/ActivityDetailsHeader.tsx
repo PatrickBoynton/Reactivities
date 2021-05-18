@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react';
 import  {Activity} from '../../../models/activity';
 
@@ -20,7 +20,7 @@ interface Props {
     activity: Activity
 }
 
-function ActivityDetailsHeader({activity}: Props) {
+function ActivityDetailsHeader({activity}: Props): ReactElement {
     return (
         <Segment.Group>
             <Segment basic attached="top" style={ {padding: '0'} }>
