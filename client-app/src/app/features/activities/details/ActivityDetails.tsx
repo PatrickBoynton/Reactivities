@@ -1,9 +1,13 @@
 import React, { ReactElement, useEffect } from 'react';
-import { Card, Image, Button } from 'semantic-ui-react';
+import { Card, Image, Button, Grid } from 'semantic-ui-react';
 import { useStore } from '../../../stores/store';
 import { Link, useParams } from 'react-router-dom';
 import LoadingComponent from '../../../layout/LoadingComponent';
 import { observer } from 'mobx-react-lite';
+import ActivityDetailsHeader from './ActivityDetailsHeader';
+import ActivityDetailsInfo from './ActivityDetailsInfo';
+import ActivityDetailsChat from './ActivityDetailsChat';
+import ActivityDetailsSidebar from './ActivityDetailsSidebar';
 
 
 function ActivityDetails(): ReactElement {
@@ -18,31 +22,19 @@ function ActivityDetails(): ReactElement {
         }
     }, [id, loadActivity])
 
-    // TODO figure out why refreshing the page makes activity disappear.
     if (loadingInitial || !activity) return <LoadingComponent/>;
 
     return (
-        <Card fluid>
-            <Image src={ `/assets/categoryImages/${ activity?.category }.jpg` } alt="Category"/>
-
-            <Card.Content>
-                <Card.Header>
-                    { activity?.title }
-                </Card.Header>
-                <Card.Meta>
-                    { activity?.date }
-                </Card.Meta>
-                <Card.Description>
-                    { activity?.description }
-                </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-                <Button.Group widths="2">
-                    <Button as={Link} to={`/manage/${activity.id}`} basic color="blue" content="Edit"/>
-                    <Button as={Link} to='/activities' basic color="grey" content="Cancel"/>
-                </Button.Group>
-            </Card.Content>
-        </Card>
+        <Grid>
+            <Grid.Column width={10}>
+                <ActivityDetailsHeader/>
+                <ActivityDetailsInfo/>
+                <ActivityDetailsChat />
+            </Grid.Column>
+            <Grid.Column width={6}>
+                <ActivityDetailsSidebar/>
+            </Grid.Column>
+        </Grid>
     );
 }
 
