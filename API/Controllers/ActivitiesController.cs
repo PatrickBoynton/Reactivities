@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application;
 using Application.Activities;
@@ -12,11 +11,13 @@ namespace API.Controllers
     public class ActivitiesController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivities() => await Mediator.Send(new List.Query());
+        public async Task<IActionResult> GetActivities()
+        {
+            return HandleResult(await Mediator.Send(new List.Query()));
+        }
 
-        [HttpGet("{id:guid}")]
-        public async Task<Task<Activity>> GetActivity(Guid id) =>
-            Mediator.Send(new Details.Query {Id = id});
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetActivity(Guid id) => HandleResult(await Mediator.Send(new Details.Query {Id = id}));
 
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity) =>
