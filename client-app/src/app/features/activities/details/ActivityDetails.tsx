@@ -18,7 +18,7 @@ function ActivityDetails(): ReactElement {
 
     useEffect(() => {
         if (id) {
-            loadActivity(id).then();
+            loadActivity(id);
         }
     }, [id, loadActivity])
 
