@@ -12,6 +12,7 @@ function NavBar(): ReactElement {
                     Reactivities
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/activities' name="activities"/>
+                <Menu.Item as={NavLink} to='/errors' name="errors"/>
                 <Menu.Item>
                     <Button as={NavLink} to='/create' positive content="Create Activity"/>
                 </Menu.Item>
