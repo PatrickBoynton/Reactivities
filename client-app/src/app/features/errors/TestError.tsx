@@ -3,7 +3,7 @@ import {Button, Header, Segment} from "semantic-ui-react";
 import axios from 'axios';
 
 function TestErrors() {
-    const baseUrl = 'http://localhost:5000/api/'
+    const baseUrl = 'http://localhost:5000/api/v1/'
 
     function handleNotFound() {
         axios.get(baseUrl + 'buggy/not-found').catch(err => console.log(err.response));
