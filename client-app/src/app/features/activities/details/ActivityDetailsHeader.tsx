@@ -21,38 +21,36 @@ interface Props {
     activity: Activity
 }
 
-function ActivityDetailsHeader({activity}: Props): ReactElement {
-    return (
-        <Segment.Group>
-            <Segment basic attached="top" style={ {padding: '0'} }>
-                <Image src={ `/assets/categoryImages/${ activity.category }.jpg` } fluid style={ activityImageStyle }/>
-                <Segment style={ activityImageTextStyle } basic>
-                    <Item.Group>
-                        <Item>
-                            <Item.Content>
-                                <Header
-                                    size="huge"
-                                    content={ activity.title }
-                                    style={ {color: 'white'} }
-                                />
-                                <p>{ activity.date }</p>
-                                <p>
-                                    Hosted by <strong>Bob</strong>
-                                </p>
-                            </Item.Content>
-                        </Item>
-                    </Item.Group>
-                </Segment>
+const ActivityDetailsHeader = ({activity}: Props): ReactElement => (
+    <Segment.Group>
+        <Segment basic attached="top" style={ {padding: '0'} }>
+            <Image src={ `/assets/categoryImages/${ activity.category }.jpg` } fluid style={ activityImageStyle }/>
+            <Segment style={ activityImageTextStyle } basic>
+                <Item.Group>
+                    <Item>
+                        <Item.Content>
+                            <Header
+                                size="huge"
+                                content={ activity.title }
+                                style={ {color: 'white'} }
+                            />
+                            <p>{ activity.date }</p>
+                            <p>
+                                Hosted by <strong>Bob</strong>
+                            </p>
+                        </Item.Content>
+                    </Item>
+                </Item.Group>
             </Segment>
-            <Segment clearing attached="bottom">
-                <Button color="teal">Join Activity</Button>
-                <Button>Cancel attendance</Button>
-                <Button as={Link} to={`/manage/${activity.id}`} color="orange" floated="right">
-                    Manage Event
-                </Button>
-            </Segment>
-        </Segment.Group>
-    );
-}
+        </Segment>
+        <Segment clearing attached="bottom">
+            <Button color="teal">Join Activity</Button>
+            <Button>Cancel attendance</Button>
+            <Button as={ Link } to={ `/manage/${ activity.id }` } color="orange" floated="right">
+                Manage Event
+            </Button>
+        </Segment>
+    </Segment.Group>
+);
 
 export default observer(ActivityDetailsHeader);

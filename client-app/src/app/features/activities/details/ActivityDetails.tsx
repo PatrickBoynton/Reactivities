@@ -10,7 +10,7 @@ import ActivityDetailsChat from './ActivityDetailsChat';
 import ActivityDetailsSidebar from './ActivityDetailsSidebar';
 
 
-function ActivityDetails(): ReactElement {
+const ActivityDetails = (): ReactElement => {
     const {activityStore} = useStore();
     const {selectedActivity: activity, loadActivity, loadingInitial} = activityStore;
     const {id} = useParams<{id: string}>();
@@ -36,6 +36,6 @@ function ActivityDetails(): ReactElement {
             </Grid.Column>
         </Grid>
     );
-}
+};
 
 export default observer(ActivityDetails);

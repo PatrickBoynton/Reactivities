@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import NotFound from '../features/errors/NotFound';
 import ServerError from '../features/errors/ServerError';
 
-function App(): ReactElement {
+const App = (): ReactElement => {
     const location = useLocation();
     return (
         <>
@@ -38,6 +38,6 @@ function App(): ReactElement {
             />
         </>
     );
-}
+};
 
 export default observer(App);

@@ -1,12 +1,11 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
-import { Button, Segment } from 'semantic-ui-react';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Button, FormField, Label, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../stores/store';
 import { observer } from 'mobx-react-lite';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import LoadingComponent from '../../../layout/LoadingComponent';
-import { Formik, Form, Field } from 'formik';
-import { v4 as uuid } from 'uuid';
-import { Activity } from '../../../models/activity';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 function ActivityForm(): ReactElement {
     const history = useHistory();
@@ -28,6 +27,10 @@ function ActivityForm(): ReactElement {
         date: '',
         city: '',
         venue: '',
+    });
+
+    const validationSchema = Yup.object({
+        title: Yup.string().required('The title is required'),
     });
 
     useEffect(() => {
@@ -57,11 +60,20 @@ function ActivityForm(): ReactElement {
 
     return (
         <Segment clearing>
-            <Formik enableReinitialize initialValues={ activity } onSubmit={ value => console.log(value) }>
+            <Formik
+                validationSchema={ validationSchema }
+                enableReinitialize
+                initialValues={ activity }
+                onSubmit={ value => console.log(value) }>
                 { ({handleSubmit}) => (
                     <Form className="ui form" onSubmit={ handleSubmit } autoComplete="off">
-                        <Field placeholder="Title"
-                               name="title"/>
+                        <FormField>
+                            <Field placeholder="Title"
+                                   name="title"/>
+                            <ErrorMessage name="title"
+                                          render={ error =>
+                                              <Label basic color="red" content={ error }/> }/>
+                        </FormField>
                         <Field placeholder="Description"
                                name="description"/>
                         <Field placeholder="Category"

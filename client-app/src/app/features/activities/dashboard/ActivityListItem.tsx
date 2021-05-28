@@ -7,50 +7,47 @@ interface Props {
     activity: Activity,
 }
 
-function ActivityListItem({activity}: Props): ReactElement {
+const ActivityListItem = ({activity}: Props): ReactElement => (
+    <Segment.Group>
+        <Segment>
+            <Item.Group>
+                <Item>
+                    <ItemImage
+                        size="tiny"
+                        circular
+                        src="/assets/user.png"/>
+                    <Item.Content>
+                        <Item.Header as={ Link } to={ `/activities/${ activity.id }` }>
+                            { activity.title }
+                        </Item.Header>
+                        <Item.Description>
+                            Hosted By: Bob
+                        </Item.Description>
+                    </Item.Content>
+                </Item>
+            </Item.Group>
+        </Segment>
 
-    return (
-        <Segment.Group>
-            <Segment>
-                <Item.Group>
-                    <Item>
-                        <ItemImage
-                            size="tiny"
-                            circular
-                            src="/assets/user.png"/>
-                        <Item.Content>
-                            <Item.Header as={ Link } to={ `/activities/${ activity.id }` }>
-                                { activity.title }
-                            </Item.Header>
-                            <Item.Description>
-                                Hosted By: Bob
-                            </Item.Description>
-                        </Item.Content>
-                    </Item>
-                </Item.Group>
-            </Segment>
-
-            <Segment>
+        <Segment>
                 <span>
                     <Icon name="clock"/> { activity.date }
-                    <Icon name='marker'/> {activity.venue}
+                    <Icon name='marker'/> { activity.venue }
                 </span>
-            </Segment>
+        </Segment>
 
-            <Segment secondary>
-                Attendees go here.
-            </Segment>
+        <Segment secondary>
+            Attendees go here.
+        </Segment>
 
-            <Segment clearing>
-                <span>{activity.description}</span>
-                <Button as={Link}
-                        to={`/activities/${activity.id}`}
-                        color='teal'
-                        floated='right'
-                        content='view'/>
-            </Segment>
-        </Segment.Group>
-    );
-}
+        <Segment clearing>
+            <span>{ activity.description }</span>
+            <Button as={ Link }
+                    to={ `/activities/${ activity.id }` }
+                    color='teal'
+                    floated='right'
+                    content='view'/>
+        </Segment>
+    </Segment.Group>
+);
 
 export default ActivityListItem;

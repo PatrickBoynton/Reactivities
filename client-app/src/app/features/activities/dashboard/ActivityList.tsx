@@ -4,7 +4,7 @@ import { useStore } from '../../../stores/store';
 import { observer } from 'mobx-react-lite';
 import ActivityListItem from './ActivityListItem';
 
-function ActivityList(): ReactElement {
+const ActivityList = (): ReactElement => {
     const {activityStore} = useStore();
     const {groupedActivities} = activityStore;
 
@@ -23,6 +23,6 @@ function ActivityList(): ReactElement {
         </>
     )
         ;
-}
+};
 
 export default observer(ActivityList);
