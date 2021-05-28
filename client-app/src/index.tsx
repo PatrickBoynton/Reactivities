@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-calendar/dist/Calendar.css';
-import 'react-toastify/dist/ReactToastify.min.css'
+import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-datepicker/dist/react-datepicker.min.css';
 import './app/layout/styles.css';
 import 'semantic-ui-css/semantic.css';
 import App from './app/layout/App';
@@ -14,7 +15,7 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
     <StoreContext.Provider value={ store }>
-        <Router history={history}>
+        <Router history={ history }>
             <App/>
         </Router>
     </StoreContext.Provider>,
