@@ -6,6 +6,11 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import LoadingComponent from '../../../layout/LoadingComponent';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import TextInput from '../../../common/form/TextInput';
+import TextArea from '../../../common/form/TextArea';
+import SelectInput from '../../../common/form/SelectInput';
+import { categoryOptions } from '../../../common/form/options/categoryOptions';
+import DateInput from '../../../common/form/DateInput';
 
 function ActivityForm(): ReactElement {
     const history = useHistory();
@@ -31,6 +36,11 @@ function ActivityForm(): ReactElement {
 
     const validationSchema = Yup.object({
         title: Yup.string().required('The title is required'),
+        description: Yup.string().required('The description is required'),
+        category: Yup.string().required('The category is required'),
+        date: Yup.string().required('The date is required'),
+        venue: Yup.string().required('The venue is required'),
+        city: Yup.string().required('The city is required'),
     });
 
     useEffect(() => {
@@ -67,25 +77,22 @@ function ActivityForm(): ReactElement {
                 onSubmit={ value => console.log(value) }>
                 { ({handleSubmit}) => (
                     <Form className="ui form" onSubmit={ handleSubmit } autoComplete="off">
-                        <FormField>
-                            <Field placeholder="Title"
-                                   name="title"/>
-                            <ErrorMessage name="title"
-                                          render={ error =>
-                                              <Label basic color="red" content={ error }/> }/>
-                        </FormField>
-                        <Field placeholder="Description"
-                               name="description"/>
-                        <Field placeholder="Category"
-                               name="category"/>
-                        <Field placeholder="Date"
-                               type="date"
-                               name="date"/>
-                        <Field placeholder="City"
-                               name="city"/>
-                        <Field placeholder="Venue"
-                               name="venue"/>
-
+                        <TextInput placeholder="title" name="title"/>
+                        <TextArea placeholder="Description"
+                                  rows={3}
+                                   name="description"/>
+                        <SelectInput options={categoryOptions}
+                                     placeholder="category"
+                                     name="category"/>
+                        <DateInput
+                                   placeholderText="Date"
+                                   name="date"
+                                   showTimeSelect
+                                   timeCaption='time'
+                                   dateFormat='MMMM d, YYYY h:mm aa'
+                        />
+                        <TextInput placeholder="city" name="city"/>
+                        <TextInput placeholder="venue" name="venue"/>
                         <Button loading={ loading }
                                 basic
                                 positive
