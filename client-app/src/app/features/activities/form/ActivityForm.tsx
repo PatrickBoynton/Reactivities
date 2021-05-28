@@ -11,6 +11,7 @@ import TextArea from '../../../common/form/TextArea';
 import SelectInput from '../../../common/form/SelectInput';
 import { categoryOptions } from '../../../common/form/options/categoryOptions';
 import DateInput from '../../../common/form/DateInput';
+import { Activity } from '../../../models/activity';
 
 function ActivityForm(): ReactElement {
     const history = useHistory();
@@ -24,12 +25,12 @@ function ActivityForm(): ReactElement {
     } = activityStore;
 
     const {id} = useParams<{ id: string }>();
-    const [activity, setActivity] = useState({
+    const [activity, setActivity] = useState<Activity>({
         id: '',
         title: '',
         category: '',
         description: '',
-        date: '',
+        date: null,
         city: '',
         venue: '',
     });
