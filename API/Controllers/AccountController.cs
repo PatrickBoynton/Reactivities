@@ -10,6 +10,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    // http://localhost:5000/api/v1/account/
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
