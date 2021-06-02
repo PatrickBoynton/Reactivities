@@ -450,3 +450,4 @@ $RECYCLE.BIN/
 *.db-shm
 *.db-wal
 .vscode/
+appsettings.json
