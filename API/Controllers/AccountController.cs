@@ -2,12 +2,14 @@ using System.Threading.Tasks;
 using API.Dtos;
 using API.Services;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/v1/[controller]")]
     // http://localhost:5000/api/v1/account/
