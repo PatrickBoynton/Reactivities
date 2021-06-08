@@ -4,73 +4,75 @@ import { toast } from 'react-toastify';
 import { history } from '../../index';
 import { store } from '../stores/store';
 
-
 const sleep = (delay: number) => {
-    return new Promise(resolve => {
-        setTimeout(resolve, delay);
-    });
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
 };
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1/';
 
-axios.interceptors.response.use(async response => {
+axios.interceptors.response.use(
+  async (response) => {
     await sleep(1000);
     return response;
-}, (error: AxiosError) => {
-    const {data, status, config} = error.response!;
+  },
+  (error: AxiosError) => {
+    const { data, status, config } = error.response!;
 
     switch (status) {
-        case 400:
-            if (typeof data === 'string') {
-                toast.error(data);
-            }
-            if (config.method === 'GET' && data.errors.hasOwnProperty('id')) {
-                history.push('/not-found');
-            }
-            if (data.errors) {
-                const modelStateErrors = [];
+      case 400:
+        if (typeof data === 'string') {
+          toast.error(data);
+        }
+        if (config.method === 'GET' && data.errors.hasOwnProperty('id')) {
+          history.push('/not-found');
+        }
+        if (data.errors) {
+          const modelStateErrors = [];
 
-                for (const key in data.errors) {
-                    if (data.errors[key]) {
-                        modelStateErrors.push(data.errors[key]);
-                    }
-                }
-                throw modelStateErrors.flat();
+          for (const key in data.errors) {
+            if (data.errors[key]) {
+              modelStateErrors.push(data.errors[key]);
             }
-            break;
-        case 401:
-            toast.error('Unauthorized.');
-            break;
-        case 404:
-            history.push('/not-found');
-            break;
-        case 500:
-            store.commonStore.setServerError(data);
-            history.push('/server-error');
-            break;
+          }
+          throw modelStateErrors.flat();
+        }
+        break;
+      case 401:
+        toast.error('Unauthorized.');
+        break;
+      case 404:
+        history.push('/not-found');
+        break;
+      case 500:
+        store.commonStore.setServerError(data);
+        history.push('/server-error');
+        break;
     }
     return Promise.reject(error);
-});
+  }
+);
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
-    get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-    post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
-    put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-    del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
+  get: <T>(url: string) => axios.get<T>(url).then(responseBody),
+  post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
+  put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
+  del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 
 const Activities = {
-    list: () => requests.get<Activity[]>('activities/'),
-    details: (id: string) => requests.get<Activity>(`activities/${ id }`),
-    create: (activity: Activity) => requests.post('activities/', activity),
-    update: (activity: Activity) => requests.put(`activities/${ activity.id }`, activity),
-    delete: (id: string) => requests.del(`activities/${ id }`),
+  list: () => requests.get<Activity[]>('activities/'),
+  details: (id: string) => requests.get<Activity>(`activities/${id}`),
+  create: (activity: Activity) => requests.post('activities/', activity),
+  update: (activity: Activity) => requests.put(`activities/${activity.id}`, activity),
+  delete: (id: string) => requests.del(`activities/${id}`),
 };
 
 const agent = {
-    Activities
+  Activities,
 };
 
 export default agent;
