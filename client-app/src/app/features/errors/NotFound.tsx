@@ -6,11 +6,11 @@ function NotFound(): ReactElement {
     return (
         <Segment placeholder>
             <Header icon>
-                <Icon name='search' />
+                <Icon name="search"/>
                 Oops what you are looking for does not exist.
             </Header>
             <Segment.Inline>
-                <Button as={Link} to='/activities' primary>
+                <Button as={ Link } to="/activities" primary>
                     Return to activities page
                 </Button>
             </Segment.Inline>

@@ -14,12 +14,12 @@ import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 
 ReactDOM.render(
-  <StoreContext.Provider value={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </StoreContext.Provider>,
-  document.getElementById('root')
+    <StoreContext.Provider value={ store }>
+        <Router history={ history }>
+            <App/>
+        </Router>
+    </StoreContext.Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

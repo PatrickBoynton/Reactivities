@@ -7,25 +7,25 @@ import LoadingComponent from '../../../layout/LoadingComponent';
 import ActivityFilters from './ActivityFilters';
 
 const ActivityDashboard = (): ReactElement => {
-  const { activityStore } = useStore();
-  const { loadActivities, activityRegistry } = activityStore;
+    const {activityStore} = useStore();
+    const {loadActivities, activityRegistry} = activityStore;
 
-  useEffect(() => {
-    if (activityRegistry.size === 0) loadActivities();
-  }, [activityRegistry, loadActivities]);
+    useEffect(() => {
+        if (activityRegistry.size === 0) loadActivities();
+    }, [activityRegistry, loadActivities]);
 
-  if (activityStore.loadingInitial) return <LoadingComponent content="Loading app" />;
+    if (activityStore.loadingInitial) return <LoadingComponent content="Loading app"/>;
 
-  return (
-    <Grid>
-      <Grid.Column width="10">
-        <ActivityList />
-      </Grid.Column>
-      <Grid.Column width="6">
-        <ActivityFilters />
-      </Grid.Column>
-    </Grid>
-  );
+    return (
+        <Grid>
+            <Grid.Column width="10">
+                <ActivityList/>
+            </Grid.Column>
+            <Grid.Column width="6">
+                <ActivityFilters/>
+            </Grid.Column>
+        </Grid>
+    );
 };
 
 export default observer(ActivityDashboard);

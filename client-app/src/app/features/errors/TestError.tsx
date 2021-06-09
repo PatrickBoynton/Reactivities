@@ -44,8 +44,8 @@ function TestErrors() {
                     <Button onClick={ handleBadGuid } content="Bad Guid" basic primary/>
                 </Button.Group>
             </Segment>
-            {errors &&
-                <ValidationErrors errors={errors} />
+            { errors &&
+            <ValidationErrors errors={ errors }/>
             }
         </>
     );
