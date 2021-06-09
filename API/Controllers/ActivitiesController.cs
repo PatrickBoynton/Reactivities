@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     // http://localhost:5000/api/v1/activities/
+    [AllowAnonymous]
     public class ActivitiesController : BaseApiController
     {
         [HttpGet]
