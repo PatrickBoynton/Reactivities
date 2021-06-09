@@ -9,11 +9,11 @@ export default class UserStore {
         makeAutoObservable(this);
     }
 
-    get isLoggedIn() {
+    get isLoggedIn(): boolean {
         return !!this.user;
     }
 
-    login = async (creds: UserFormValues) => {
+    login = async (creds: UserFormValues): Promise<void> => {
         try {
             const user = await agent.Account.login(creds);
             console.log(user);
