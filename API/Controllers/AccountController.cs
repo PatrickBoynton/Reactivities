@@ -41,7 +41,7 @@ namespace API.Controllers
 
             if (result.Succeeded)
             {
-                CreateUserObject(user);
+                return CreateUserObject(user);
             }
 
             return Unauthorized();
@@ -66,10 +66,10 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 UserName = registerDto.Password,
             };
-
-            Task<IdentityResult> result = _userManager.CreateAsync(user, registerDto.Password);
-
-            if (result.IsCompletedSuccessfully)
+            
+            IdentityResult result = await _userManager.CreateAsync(user, registerDto.Password);
+            
+            if (result.Succeeded)
             {
                 CreateUserObject(user);
             }
@@ -93,7 +93,7 @@ namespace API.Controllers
                 DisplayName = user.DisplayName,
                 Image = null,
                 Token = _service.CreateToken(user),
-                Username = user.UserName
+                Username = user.UserName,
             };
         }
         
