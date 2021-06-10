@@ -5,7 +5,7 @@ import { Button, Label } from 'semantic-ui-react';
 import { useStore } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 
-function LoginForm() {
+const LoginForm = () => {
     const {userStore} = useStore();
     return (
         <Formik initialValues={ {email: '', password: '', error: null} }
