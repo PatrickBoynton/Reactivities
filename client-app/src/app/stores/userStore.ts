@@ -19,6 +19,7 @@ export default class UserStore {
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
+            runInAction(() => this.user = user);
             history.push('/activities');
             runInAction(() => this.user = user);
         } catch (e) {
@@ -26,9 +27,9 @@ export default class UserStore {
         }
     };
 
-    logout = () => {
+    logout = (): void => {
         store.commonStore.setToken(null);
-        localStorage.removeItem('jwt');
+        window.localStorage.removeItem('jwt');
         this.user = null;
         history.push('/');
     };
