@@ -14,7 +14,7 @@ const ActivityDashboard = (): ReactElement => {
         if (activityRegistry.size === 0) loadActivities();
     }, [activityRegistry, loadActivities]);
 
-    if (activityStore.loadingInitial) return <LoadingComponent content="Loading app"/>;
+    if (activityStore.loadingInitial) return <LoadingComponent content="Loading activities..."/>;
 
     return (
         <Grid>
