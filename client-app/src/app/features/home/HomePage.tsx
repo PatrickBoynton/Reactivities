@@ -7,7 +7,7 @@ import LoggedOut from './LoginState/LoggedOut';
 
 
 const HomePage = (): ReactElement => {
-    const {userStore} = useStore();
+    const {userStore, modalStore} = useStore();
     return <>
         <Segment inverted textAlign="center" vertical className="masthead">
             <Container text>
@@ -18,7 +18,7 @@ const HomePage = (): ReactElement => {
                            style={ {marginBottom: 12} }/>
                     Reactivities
                 </Header>
-                { userStore.isLoggedIn ? <LoggedIn/> : <LoggedOut/> }
+                { userStore.isLoggedIn ? <LoggedIn/> : <LoggedOut modalStore={modalStore}/> }
             </Container>
         </Segment>
     </>;
