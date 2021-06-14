@@ -1,6 +1,5 @@
 import { ServerError } from '../models/serverError';
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
-import agent from '../api/agent';
+import { makeAutoObservable, reaction } from 'mobx';
 
 export default class CommonStore {
     error: ServerError | null = null;
