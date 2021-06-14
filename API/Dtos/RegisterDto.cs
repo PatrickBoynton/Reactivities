@@ -10,7 +10,9 @@ namespace API.Dtos
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        [RegularExpression("(?=.*\\d)(?=.*[a-z]).{4, }$", ErrorMessage = "Password must be more complex.")]
+        // (?=.*\\d)(?=.*[a-z]).{4, }$
+        //TODO make more complex when in production.
+        [RegularExpression(@"^\w+$", ErrorMessage = "Password must be more complex.")]
         public string Password { get; set; }
         [Required]
         public string Username { get; set; }
