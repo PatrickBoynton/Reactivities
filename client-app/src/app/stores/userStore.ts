@@ -34,12 +34,24 @@ export default class UserStore {
         history.push('/');
     };
 
-    getUser = async () => {
+    register = async (creds: UserFormValues): Promise<void> => {
+        try {
+            const user = await agent.Account.register(creds);
+            store.commonStore.setToken(user.token);
+            runInAction(() => this.user = user);
+            history.push('/activities');
+            store.modalStore.closeModal();
+        } catch (e) {
+            throw e;
+        }
+    };
+
+    getUser = async (): Promise<void> => {
         try {
             const user = await agent.Account.current();
             runInAction(() => this.user = user);
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 }
