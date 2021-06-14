@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { Button } from 'semantic-ui-react';
 import ModalStore from '../../../stores/modalStore';
 import LoginForm from '../../users/LoginForm';
+import RegisterForm from '../../users/RegisterForm';
 
 interface Props {
     modalStore: ModalStore;
@@ -14,7 +15,7 @@ const LoggedOut = ({modalStore}: Props): ReactElement => {
                   size="huge"
                   inverted
                   content="Login"/>
-            <Button onClick={() => modalStore.openModal(<h1>Register</h1>)}
+            <Button onClick={() => modalStore.openModal(<RegisterForm/>)}
                     to="/login"
                     size="huge"
                     inverted
