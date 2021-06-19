@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 import { useStore } from '../../stores/store';
 import { ErrorMessage, Form, Formik } from 'formik';
-import { Button, Header, Label } from 'semantic-ui-react';
+import { Button, Header } from 'semantic-ui-react';
 import TextInput from '../../common/form/TextInput';
 import * as Yup from 'yup';
+import ValidationErrors from '../errors/ValidationErrors';
 
 const RegisterForm = (): ReactElement => {
     const {userStore} = useStore();
@@ -20,12 +21,11 @@ const RegisterForm = (): ReactElement => {
                 }) }
         >
             { ({handleSubmit, isSubmitting, errors, isValid, dirty}) =>
-                <Form className="ui form"
+                <Form className="ui form error"
                       onSubmit={ handleSubmit }
                       autoComplete="off">
                     <Header as="h2" content="Sign up to Reactivities" color="teal" textAlign="center"/>
-                    <ErrorMessage name="error" render={ () => <Label style={ {marginBottom: 10} } basic color="red"
-                                                                     content={ errors.error }/> }/>
+                    <ErrorMessage name="error" render={ () => <ValidationErrors errors={ errors }/> }/>
                     <TextInput placeholder="DisplayName" name="displayName"/>
                     <TextInput placeholder="UserName" name="userName"/>
                     <TextInput placeholder="Email" name="email"/>
