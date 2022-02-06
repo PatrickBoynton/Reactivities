@@ -15,12 +15,15 @@ public class List
     {
         private readonly DataContext _context;
 
-        private Handler(DataContext context)          
+        public Handler(DataContext context)
         {
             _context = context;
         }
 
 
-        public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken) => await _context.Activities.ToListAsync();
+        public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
+        {
+            return await _context.Activities.ToListAsync();
+        }
     }
 }
