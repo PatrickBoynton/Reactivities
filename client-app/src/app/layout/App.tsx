@@ -49,7 +49,7 @@ function App() {
         setSubmitting(true);
         if (activity.id) {
             agent.Activities.update(activity).then(() => {
-                setActivities([...activities.filter(activity => activity.id !== activity.id), activity]);
+                setActivities([...activities.filter(x => x.id !== activity.id), activity]);
                 setSelectedActivity(activity);
                 setEditMode(false);
                 setSubmitting(false);
@@ -66,7 +66,11 @@ function App() {
     };
 
     const handleDeleteActivity = (id: string) => {
-        setActivities([...activities.filter(activity => activity.id !== id)]);
+        setSubmitting(true);
+        agent.Activities.delete(id).then(() => {
+            setActivities([...activities.filter(activity => activity.id !== id)]);
+            setSubmitting(false);
+        });
     };
 
     if (loading) return <LoadingComponent/>;
