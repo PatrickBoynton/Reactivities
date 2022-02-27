@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "semantic-ui-react";
-import { v4 as uuid } from "uuid";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import agent from "../api/agent";
 import { Activity } from "../models/Activity";
@@ -12,33 +11,11 @@ import Navbar from "./Navbar";
 const App = () => {
     const {activityStore} = useStore();
     const [activities, setActivities] = useState<Activity[]>([]);
-    const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
-    const [editMode, setEditMode] = useState(false);
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         activityStore.loadActivities();
     }, [activityStore]);
-
-    const handleEditOrCreateActivity = (activity: Activity) => {
-        setSubmitting(true);
-        if (activity.id) {
-            agent.Activities.update(activity).then(() => {
-                setActivities([...activities.filter(x => x.id !== activity.id), activity]);
-                setSelectedActivity(activity);
-                setEditMode(false);
-                setSubmitting(false);
-            });
-        } else {
-            activity.id = uuid();
-            agent.Activities.create(activity).then(() => {
-                setActivities([...activities, activity]);
-                setSelectedActivity(activity);
-                setEditMode(false);
-                setSubmitting(false);
-            });
-        }
-    };
 
     const handleDeleteActivity = (id: string) => {
         setSubmitting(true);
@@ -55,7 +32,6 @@ const App = () => {
             <Navbar/>
             <Container style={{marginTop: "7em"}}>
                 <ActivityDashboard activities={activityStore.activities}
-                                   createOrEdit={handleEditOrCreateActivity}
                                    deleteActivity={handleDeleteActivity}
                                    submitting={submitting}
                 />
