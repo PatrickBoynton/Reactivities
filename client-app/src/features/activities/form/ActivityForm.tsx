@@ -5,8 +5,8 @@ import { useStore } from "../../../app/stores/store";
 
 
 const ActivityForm = () => {
-    const { activityStore } = useStore();
-    const { selectedActivity, closeForm, createActivity, updateActivity, loading} = activityStore;
+    const {activityStore} = useStore();
+    const {selectedActivity, createActivity, updateActivity, loading} = activityStore;
 
     const initialState = selectedActivity ?? {
         id: "",
@@ -41,7 +41,7 @@ const ActivityForm = () => {
             <Form.Input placeholder="City" value={activity.city} name="city" onChange={handleInputChange}/>
             <Form.Input placeholder="Venue" value={activity.venue} name="venue" onChange={handleInputChange}/>
             <Button floated="right" positive type="submit" content="Submit"/>
-            <Button loading={loading} onClick={closeForm} floated="right" type="button" content="Cancel"/>
+            <Button loading={loading} floated="right" type="button" content="Cancel"/>
         </Form>
     </Segment>;
 };
