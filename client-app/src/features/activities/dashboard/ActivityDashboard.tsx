@@ -6,22 +6,22 @@ import { useStore } from "../../../app/stores/store";
 import ActivityList from "./ActivityList";
 
 const ActivityDashboard = () => {
-    const {activityStore} = useStore();
+	const {activityStore} = useStore();
 
-    useEffect(() => {
-        activityStore.loadActivities();
-    }, [activityStore]);
+	useEffect(() => {
+		activityStore.loadActivities();
+	}, [activityStore]);
 
-    if (activityStore.loadingInitial) return <LoadingComponent/>;
+	if (activityStore.loadingInitial) return <LoadingComponent/>;
 
-    return <Grid>
-        <Grid.Column width="10">
-            <ActivityList/>
-        </Grid.Column>
-        <Grid.Column width="6">
-            <h1>Activity Filters</h1>
-        </Grid.Column>
-    </Grid>;
+	return <Grid>
+		<Grid.Column width="10">
+			<ActivityList/>
+		</Grid.Column>
+		<Grid.Column width="6">
+			<h1>Activity Filters</h1>
+		</Grid.Column>
+	</Grid>;
 };
 
 export default observer(ActivityDashboard);

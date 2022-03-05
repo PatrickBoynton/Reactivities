@@ -7,12 +7,12 @@ import { store, StoreContext } from "./app/stores/store";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-    <StoreContext.Provider value={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
-    </StoreContext.Provider>,
-    document.getElementById("root")
+	<StoreContext.Provider value={store}>
+		<BrowserRouter>
+			<App/>
+		</BrowserRouter>
+	</StoreContext.Provider>,
+	document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
