@@ -7,9 +7,12 @@ import ActivityList from "./ActivityList";
 
 const ActivityDashboard = () => {
 	const {activityStore} = useStore();
+	const {loadActivities, activityRegistry} = activityStore;
 
 	useEffect(() => {
-		activityStore.loadActivities();
+		if (activityRegistry.size <= 1) {
+			loadActivities();
+		}
 	}, [activityStore]);
 
 	if (activityStore.loadingInitial) return <LoadingComponent/>;
