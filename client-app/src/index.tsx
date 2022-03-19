@@ -1,4 +1,5 @@
 import React from "react";
+import "react-calendar/dist/Calendar.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/layout/App";
@@ -7,9 +8,9 @@ import { store, StoreContext } from "./app/stores/store";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-	<StoreContext.Provider value={store}>
+	<StoreContext.Provider value = {store}>
 		<BrowserRouter>
-			<App/>
+			<App />
 		</BrowserRouter>
 	</StoreContext.Provider>,
 	document.getElementById("root")
