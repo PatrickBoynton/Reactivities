@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Image, Item, Label, List, Segment } from "semantic-ui-react";
 
-function ActivityDetailedSidebar() {
+const ActivityDetailedSidebar = () => {
 	return <>
 		<Segment
 			textAlign = "center"
@@ -55,6 +55,6 @@ function ActivityDetailedSidebar() {
 			</List>
 		</Segment>
 	</>;
-}
+};
 
 export default observer(ActivityDetailedSidebar);
