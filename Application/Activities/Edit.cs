@@ -1,37 +1,49 @@
+using Application.Core;
 using AutoMapper;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities;
-
-public class Edit
+namespace Application.Activities
 {
-    public class Command : IRequest
+    public class Edit
     {
-        public Activity Activity { get; set; }
-    }
-
-    public class Handler : IRequestHandler<Command>
-    {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-
-        public Handler(DataContext context, IMapper mapper)
+        public class Command : IRequest<Result<Unit>>
         {
-            _context = context;
-            _mapper = mapper;
+            public Activity Activity { get; set; }
         }
 
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
-            Activity? activity = await _context.Activities.FindAsync(request.Activity.Id);
+            readonly DataContext _context;
+            readonly IMapper _mapper;
 
-            _mapper.Map(request.Activity, activity);
+            public Handler(DataContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
 
-            await _context.SaveChangesAsync();
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+            {
+                var activity = await _context.Activities.FindAsync(request.Activity.Id);
 
-            return Unit.Value;
+                if (activity == null) return null;
+
+                _mapper.Map(request.Activity, activity);
+
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to edit activity");
+
+                return Result<Unit>.Success(Unit.Value);
+            }
+
+            public class CommandValidator : AbstractValidator<Command>
+            {
+                public CommandValidator() => RuleFor(command => command.Activity).SetValidator(new ActivityValidator());
+            }
         }
     }
 }
