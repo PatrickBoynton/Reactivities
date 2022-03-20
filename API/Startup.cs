@@ -1,41 +1,44 @@
 using API.Extensions;
+using Application.Activities;
+using FluentValidation.AspNetCore;
 
-namespace API;
-
-public class Startup
+namespace API
 {
-    private readonly IConfiguration _configuration;
-
-    public Startup(IConfiguration configuration)
+    public class Startup
     {
-        _configuration = configuration;
-    }
+        readonly IConfiguration _configuration;
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddControllers();
-        services.AddApplicationServices(_configuration);
-    }
+        public Startup(IConfiguration configuration) => _configuration = configuration;
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+            services.AddControllers().AddFluentValidation(_configuration =>
+            {
+                _configuration.RegisterValidatorsFromAssemblyContaining<Create>();
+            });
+            services.AddApplicationServices(_configuration);
         }
 
-        app.UseHttpsRedirection();
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+            }
 
-        app.UseRouting();
+            app.UseHttpsRedirection();
 
-        app.UseCors("CorsPolicy");
+            app.UseRouting();
 
-        app.UseAuthorization();
+            app.UseCors("CorsPolicy");
 
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
     }
 }
