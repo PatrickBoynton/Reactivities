@@ -1,5 +1,6 @@
 import React from "react";
 import "react-calendar/dist/Calendar.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/layout/App";
@@ -8,11 +9,11 @@ import { store, StoreContext } from "./app/stores/store";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-	<StoreContext.Provider value = {store}>
-		<BrowserRouter>
+	<StoreContext.Provider value={store} >
+		<BrowserRouter >
 			<App />
-		</BrowserRouter>
-	</StoreContext.Provider>,
+		</BrowserRouter >
+	</StoreContext.Provider >,
 	document.getElementById("root")
 );
 
