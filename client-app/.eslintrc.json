@@ -23,7 +23,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "indent": [
-      "error",
+      2,
       "tab"
     ],
     "linebreak-style": [
@@ -37,6 +37,10 @@
     "semi": [
       "error",
       "always"
+    ],
+    "no-mixed-spaces-and-tabs": [
+      "error",
+      "smart-tabs"
     ]
   }
 }
