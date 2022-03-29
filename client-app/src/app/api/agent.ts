@@ -1,5 +1,8 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import { history } from "../../index";
 import { Activity } from "../models/Activity";
+import { store } from "../stores/store";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -14,13 +17,37 @@ const sleep = (delay: number) => {
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 axios.interceptors.response.use(async response => {
-	try {
-		await sleep(1000);
-		return response;
-	} catch (error) {
-		console.log(error);
-		return Promise.reject(error);
+	await sleep(1000);
+	return response;
+}, (error: AxiosError) => {
+	const {data, status} = error.response!;
+	switch (status) {
+	case 400:
+		if (data.errors) {
+			const modelStateErrors = [];
+			for (const key in data.errors) {
+				if (data.errors[key]) {
+					modelStateErrors.push(data.errors[key]);
+				}
+			}
+			throw modelStateErrors.flat();
+		} else {
+			toast.error(data);
+		}
+		break;
+	case 401:
+		toast.error("unauthorised");
+		break;
+	case 404:
+		history.push("/not-found");
+		toast.error("Not found");
+		break;
+	case 500:
+		store.commonStore.setServerError(data);
+		history.push("/server-error");
+		break;
 	}
+	return Promise.reject(error);
 });
 
 const requests = {
@@ -29,7 +56,7 @@ const requests = {
 	post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-	del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
+	del: <T>(url: string) => axios.delete<T>(url).then(responseBody)
 };
 
 const Activities = {
