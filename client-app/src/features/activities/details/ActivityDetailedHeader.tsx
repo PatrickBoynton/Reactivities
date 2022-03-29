@@ -20,16 +20,16 @@ interface Props {
 
 const ActivityDetailedHeader = ({activity}: Props) => {
 	return <Segment.Group>
-		<Segment basic attached = "top" style = {{padding: "0"}}>
-			<Image src = {`/assets/categoryImages/${activity.category}.jpg`} fluid style = {activityImageStyle} />
-			<Segment style = {activityImageTextStyle} basic>
+		<Segment basic attached="top" style={{padding: "0"}}>
+			<Image src={`/assets/categoryImages/${activity.category}.jpg`} fluid style={activityImageStyle} />
+			<Segment style={activityImageTextStyle} basic>
 				<Item.Group>
 					<Item>
 						<Item.Content>
 							<Header
-								size = "huge"
-								content = {activity.title}
-								style = {{color: "white"}}
+								size="huge"
+								content={activity.title}
+								style={{color: "white"}}
 							/>
 							<p>{activity.date}</p>
 							<p>
@@ -40,10 +40,10 @@ const ActivityDetailedHeader = ({activity}: Props) => {
 				</Item.Group>
 			</Segment>
 		</Segment>
-		<Segment clearing attached = "bottom">
-			<Button color = "teal">Join Activity</Button>
+		<Segment clearing attached="bottom">
+			<Button color="teal">Join Activity</Button>
 			<Button>Cancel attendance</Button>
-			<Button color = "orange" floated = "right">
+			<Button color="orange" floated="right">
                 Manage Event
 			</Button>
 		</Segment>

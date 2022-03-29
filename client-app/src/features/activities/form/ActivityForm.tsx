@@ -46,43 +46,37 @@ const ActivityForm = () => {
 	};
 
 
-	if (loadingInitial) return <LoadingComponent content="Loading..."/>;
+	if (loadingInitial) return <LoadingComponent content="Loading..." />;
 
 	return <Segment clearing>
 		<Form onSubmit={handleSubmit} autoComplete="off">
-			<Form.Input
-				placeholder="Title"
+			<Form.Input placeholder="Title"
 				value={activity.title}
 				name="title"
-				onChange={handleInputChange}/>
-			<Form.TextArea
-				placeholder="Description"
+				onChange={handleInputChange} />
+			<Form.TextArea placeholder="Description"
 				value={activity.description}
 				name="description"
-				onChange={handleInputChange}/>
-			<Form.Input
-				placeholder="Category"
+				onChange={handleInputChange} />
+			<Form.Input placeholder="Category"
 				value={activity.category}
 				name="category"
-				onChange={handleInputChange}/>
-			<Form.Input
-				type="date"
+				onChange={handleInputChange} />
+			<Form.Input type="date"
 				placeholder="Date"
 				value={activity.date}
 				name="date"
-				onChange={handleInputChange}/>
-			<Form.Input
-				placeholder="City"
+				onChange={handleInputChange} />
+			<Form.Input placeholder="City"
 				value={activity.city}
 				name="city"
-				onChange={handleInputChange}/>
-			<Form.Input
-				placeholder="Venue"
+				onChange={handleInputChange} />
+			<Form.Input placeholder="Venue"
 				value={activity.venue}
 				name="venue"
-				onChange={handleInputChange}/>
-			<Button loading={loading} floated="right" positive type="submit" content="Submit"/>
-			<Button as={Link} to="/activities" floated="right" type="button" content="Cancel"/>
+				onChange={handleInputChange} />
+			<Button loading={loading} floated="right" positive type="submit" content="Submit" />
+			<Button as={Link} to="/activities" floated="right" type="button" content="Cancel" />
 		</Form>
 	</Segment>;
 };

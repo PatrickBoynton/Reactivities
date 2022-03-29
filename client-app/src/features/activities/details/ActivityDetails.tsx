@@ -22,12 +22,12 @@ const ActivityDetails = () => {
 	if (loadingInitial || !activity) return <LoadingComponent />;
 
 	return <Grid>
-		<Grid.Column width = {10}>
-			<ActivityDetailedHeader activity = {activity} />
-			<ActivityDetailedInfo activity = {activity} />
+		<Grid.Column width={10}>
+			<ActivityDetailedHeader activity={activity} />
+			<ActivityDetailedInfo activity={activity} />
 			<ActivityDetailedChat />
 		</Grid.Column>
-		<Grid.Column width = {6}>
+		<Grid.Column width={6}>
 			<ActivityDetailedSidebar />
 		</Grid.Column>
 	</Grid>;
