@@ -19,10 +19,10 @@ const ActivityDashboard = () => {
 	if (activityStore.loadingInitial) return <LoadingComponent />;
 
 	return <Grid>
-		<Grid.Column width = "10">
+		<Grid.Column width="10">
 			<ActivityList />
 		</Grid.Column>
-		<Grid.Column width = "6">
+		<Grid.Column width="6">
 			<ActivityFilter />
 		</Grid.Column>
 	</Grid>;
