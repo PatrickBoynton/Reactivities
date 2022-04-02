@@ -20,9 +20,16 @@ axios.interceptors.response.use(async response => {
 	await sleep(1000);
 	return response;
 }, (error: AxiosError) => {
-	const {data, status} = error.response!;
+	const {data, status, config} = error.response!;
 	switch (status) {
 	case 400:
+		if (typeof data === "string") {
+			toast.error(data);
+		}
+		// eslint-disable-next-line no-prototype-builtins
+		if (config.method === "get" && data.errors.hasOwnProperty("id")) {
+			history.push("/not-found");
+		}
 		if (data.errors) {
 			const modelStateErrors = [];
 			for (const key in data.errors) {
@@ -31,8 +38,6 @@ axios.interceptors.response.use(async response => {
 				}
 			}
 			throw modelStateErrors.flat();
-		} else {
-			toast.error(data);
 		}
 		break;
 	case 401:
