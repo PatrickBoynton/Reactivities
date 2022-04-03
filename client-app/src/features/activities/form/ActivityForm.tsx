@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import * as Yup from "yup";
 import CustomDatePicker from "../../../app/common/form/CustomDatePicker";
@@ -14,9 +14,8 @@ import { useStore } from "../../../app/stores/store";
 
 
 const ActivityForm = () => {
-	const history = useHistory();
 	const {activityStore} = useStore();
-	const {loadActivity, createActivity, updateActivity, loading, loadingInitial} = activityStore;
+	const {loadActivity, loading, loadingInitial} = activityStore;
 	const {id} = useParams<{ id: string }>();
 	const [activity, setActivity] = useState({
 		id: "",

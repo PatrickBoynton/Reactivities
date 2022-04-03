@@ -20,6 +20,7 @@ axios.interceptors.response.use(async response => {
 	await sleep(1000);
 	return response;
 }, (error: AxiosError) => {
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const {data, status, config} = error.response!;
 	switch (status) {
 	case 400:

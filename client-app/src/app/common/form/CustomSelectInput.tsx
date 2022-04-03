@@ -1,10 +1,10 @@
 import { useField } from "formik";
-import { FormField, Label, Select } from "semantic-ui-react";
+import { DropdownItemProps, FormField, Label, Select } from "semantic-ui-react";
 
 interface Props {
     placeholder: string;
     name: string;
-    options: any;
+    options: DropdownItemProps[];
     label?: string;
 }
 
