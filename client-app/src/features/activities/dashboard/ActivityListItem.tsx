@@ -5,7 +5,7 @@ import { Activity } from "../../../app/models/Activity";
 
 
 interface Props {
-    activity: Activity;
+	activity: Activity;
 }
 
 const ActivityListItem = ({activity}: Props) => {
@@ -17,7 +17,7 @@ const ActivityListItem = ({activity}: Props) => {
 					<Item.Content>
 						<Item.Header as={Link} to={`/activities/${activity.id}`}>{activity.title}</Item.Header>
 						<Item.Description>
-                            Hosted By Bob
+							Hosted By Bob
 						</Item.Description>
 					</Item.Content>
 				</Item>
@@ -30,11 +30,14 @@ const ActivityListItem = ({activity}: Props) => {
 			</span>
 		</Segment>
 		<Segment secondary>
-            Attendees go here.
+			Attendees go here.
 		</Segment>
 		<Segment clearing>
 			<span>{activity.description}</span>
-			<Button as={Link} to={`/activities/${activity.id}`} color="teal" floated="right" content="View" />
+			<Button as={Link}
+				to={`/activities/${activity.id}`}
+				color="teal"
+				floated="right">View</Button>
 		</Segment>
 	</Segment.Group>;
 };
