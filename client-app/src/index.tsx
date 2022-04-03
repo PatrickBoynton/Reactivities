@@ -1,6 +1,7 @@
 import { createBrowserHistory } from "history";
 import React from "react";
 import "react-calendar/dist/Calendar.css";
+import "react-datepicker/dist/react-datepicker.min.css";
 import ReactDOM from "react-dom";
 import { Router } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";

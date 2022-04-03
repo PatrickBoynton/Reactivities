@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import * as Yup from "yup";
+import CustomDatePicker from "../../../app/common/form/CustomDatePicker";
 import CustomSelectInput from "../../../app/common/form/CustomSelectInput";
 import CustomTextArea from "../../../app/common/form/CustomTextArea";
 import CustomTextInput from "../../../app/common/form/CustomTextInput";
@@ -55,7 +56,12 @@ const ActivityForm = () => {
 					<CustomTextInput placeholder="Title" name="title" />
 					<CustomTextArea placeholder="Description" name="description" rows={3} />
 					<CustomSelectInput options={categoryOptions} placeholder="Category" name="category" />
-					<CustomTextInput placeholder="Date" name="date" />
+					<CustomDatePicker placeholderText="Date"
+						name="date"
+						showTimeSelect
+						timeCaption="time"
+						dateFormat="MMMM d, yyyy h:mm aa"
+					/>
 					<CustomTextInput placeholder="City" name="city" />
 					<CustomTextInput placeholder="Venue" name="venue" />
 					<Button loading={loading} floated="right" positive type="submit" content="Submit" />
