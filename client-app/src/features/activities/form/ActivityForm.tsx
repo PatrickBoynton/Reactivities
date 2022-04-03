@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import * as Yup from "yup";
+import CustomTextArea from "../../../app/common/form/CustomTextArea";
 import CustomTextInput from "../../../app/common/form/CustomTextInput";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -50,7 +51,7 @@ const ActivityForm = () => {
 					onSubmit={handleSubmit}
 					autoComplete="off">
 					<CustomTextInput placeholder="Title" name="title" />
-					<CustomTextInput placeholder="Description" name="description" />
+					<CustomTextArea placeholder="Description" name="description" rows={3} />
 					<CustomTextInput placeholder="Category" name="category" />
 					<CustomTextInput placeholder="Date" name="date" />
 					<CustomTextInput placeholder="City" name="city" />
