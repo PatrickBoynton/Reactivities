@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import * as Yup from "yup";
+import CustomSelectInput from "../../../app/common/form/CustomSelectInput";
 import CustomTextArea from "../../../app/common/form/CustomTextArea";
 import CustomTextInput from "../../../app/common/form/CustomTextInput";
+import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
 
@@ -52,7 +54,7 @@ const ActivityForm = () => {
 					autoComplete="off">
 					<CustomTextInput placeholder="Title" name="title" />
 					<CustomTextArea placeholder="Description" name="description" rows={3} />
-					<CustomTextInput placeholder="Category" name="category" />
+					<CustomSelectInput options={categoryOptions} placeholder="Category" name="category" />
 					<CustomTextInput placeholder="Date" name="date" />
 					<CustomTextInput placeholder="City" name="city" />
 					<CustomTextInput placeholder="Venue" name="venue" />
