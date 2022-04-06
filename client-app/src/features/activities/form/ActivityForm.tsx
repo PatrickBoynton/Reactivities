@@ -10,21 +10,22 @@ import CustomTextArea from "../../../app/common/form/CustomTextArea";
 import CustomTextInput from "../../../app/common/form/CustomTextInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
+import { Activity } from "../../../app/models/Activity";
 import { useStore } from "../../../app/stores/store";
 
 
 const ActivityForm = () => {
-	const {activityStore} = useStore();
-	const {loadActivity, loading, loadingInitial} = activityStore;
-	const {id} = useParams<{ id: string }>();
-	const [activity, setActivity] = useState({
+	const { activityStore } = useStore();
+	const { loadActivity, loading, loadingInitial } = activityStore;
+	const { id } = useParams<{ id: string }>();
+	const [activity, setActivity] = useState<Activity>({
 		id: "",
 		title: "",
 		category: "",
 		description: "",
-		date: "",
+		date: null,
 		city: "",
-		venue: ""
+		venue: "",
 	});
 
 	const validationSchema = Yup.object({
@@ -38,7 +39,7 @@ const ActivityForm = () => {
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		if (id) loadActivity(id).then(activity => setActivity(activity!));
+		if (id) loadActivity(id).then(activity => setActivity(activity));
 	}, [id, loadActivity]);
 
 	if (loadingInitial) return <LoadingComponent content="Loading..." />;
@@ -48,18 +49,18 @@ const ActivityForm = () => {
 			enableReinitialize
 			initialValues={activity}
 			onSubmit={values => console.log(values)}>
-			{({handleSubmit}) =>
+			{({ handleSubmit }) =>
 				<Form className="ui form"
-					onSubmit={handleSubmit}
-					autoComplete="off">
+					  onSubmit={handleSubmit}
+					  autoComplete="off">
 					<CustomTextInput placeholder="Title" name="title" />
 					<CustomTextArea placeholder="Description" name="description" rows={3} />
 					<CustomSelectInput options={categoryOptions} placeholder="Category" name="category" />
 					<CustomDatePicker placeholderText="Date"
-						name="date"
-						showTimeSelect
-						timeCaption="time"
-						dateFormat="MMMM d, yyyy h:mm aa"
+									  name="date"
+									  showTimeSelect
+									  timeCaption="time"
+									  dateFormat="MMMM d, yyyy h:mm aa"
 					/>
 					<CustomTextInput placeholder="City" name="city" />
 					<CustomTextInput placeholder="Venue" name="venue" />

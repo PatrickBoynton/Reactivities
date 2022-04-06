@@ -1,9 +1,10 @@
+import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/Activity";
 
 const activityImageStyle = {
-	filter: "brightness(30%)"
+	filter: "brightness(30%)",
 };
 
 const activityImageTextStyle = {
@@ -12,16 +13,16 @@ const activityImageTextStyle = {
 	left: "5%",
 	width: "100%",
 	height: "auto",
-	color: "white"
+	color: "white",
 };
 
 interface Props {
-    activity: Activity;
+	activity: Activity;
 }
 
-const ActivityDetailedHeader = ({activity}: Props) => {
+const ActivityDetailedHeader = ({ activity }: Props) => {
 	return <Segment.Group>
-		<Segment basic attached="top" style={{padding: "0"}}>
+		<Segment basic attached="top" style={{ padding: "0" }}>
 			<Image src={`/assets/categoryImages/${activity.category}.jpg`} fluid style={activityImageStyle} />
 			<Segment style={activityImageTextStyle} basic>
 				<Item.Group>
@@ -30,11 +31,10 @@ const ActivityDetailedHeader = ({activity}: Props) => {
 							<Header
 								size="huge"
 								content={activity.title}
-								style={{color: "white"}}
-							/>
-							<p>{activity.date}</p>
+								style={{ color: "white" }} />
+							<p>{format(activity.date, "dd MMM yyyy")}</p>
 							<p>
-                                Hosted by <strong>Bob</strong>
+								Hosted by <strong>Bob</strong>
 							</p>
 						</Item.Content>
 					</Item>
@@ -45,7 +45,7 @@ const ActivityDetailedHeader = ({activity}: Props) => {
 			<Button color="teal">Join Activity</Button>
 			<Button>Cancel attendance</Button>
 			<Button as={Link} to={`/manage/${activity.id}`} color="orange" floated="right">
-                Manage Event
+				Manage Event
 			</Button>
 		</Segment>
 	</Segment.Group>;
