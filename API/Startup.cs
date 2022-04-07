@@ -5,42 +5,43 @@ using FluentValidation.AspNetCore;
 
 namespace API
 {
-    public class Startup
-    {
-        readonly IConfiguration _configuration;
+	public class Startup
+	{
+		readonly IConfiguration _configuration;
 
-        public Startup(IConfiguration configuration) => _configuration = configuration;
+		public Startup(IConfiguration configuration) => _configuration = configuration;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers().AddFluentValidation(_configuration =>
-            {
-                _configuration.RegisterValidatorsFromAssemblyContaining<Create>();
-            });
-            services.AddApplicationServices(_configuration);
-        }
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddControllers().AddFluentValidation(_configuration =>
+			{
+				_configuration.RegisterValidatorsFromAssemblyContaining<Create>();
+			});
+			services.AddIdentityServices(_configuration);
+			services.AddApplicationServices(_configuration);
+		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseMiddleware<ExceptionMiddleware>();
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			app.UseMiddleware<ExceptionMiddleware>();
 
-            if (env.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
-            }
+			if (env.IsDevelopment())
+			{
+				app.UseSwagger();
+				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+			}
 
-            app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 
-            app.UseRouting();
+			app.UseRouting();
 
-            app.UseCors("CorsPolicy");
+			app.UseCors("CorsPolicy");
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        }
-    }
+			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+		}
+	}
 }
