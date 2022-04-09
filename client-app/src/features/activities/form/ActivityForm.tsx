@@ -11,7 +11,7 @@ import CustomTextArea from "../../../app/common/form/CustomTextArea";
 import CustomTextInput from "../../../app/common/form/CustomTextInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
-import { Activity } from "../../../app/models/Activity";
+import { Activity } from "../../../app/models/activity";
 import { useStore } from "../../../app/stores/store";
 import { history } from "../../../index";
 

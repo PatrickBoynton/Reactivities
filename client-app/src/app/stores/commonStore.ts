@@ -1,5 +1,5 @@
-import { ServerError } from "../models/ServerError";
 import { makeAutoObservable } from "mobx";
+import { ServerError } from "../models/serverError";
 
 export default class CommonStore {
 	error: ServerError | null = null;
