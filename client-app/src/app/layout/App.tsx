@@ -9,6 +9,7 @@ import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import TestErrors from "../../features/errors/TestErrors";
 import HomePage from "../../features/home/HomePage";
+import LoginForm from "../../features/users/LoginForm";
 import Navbar from "./Navbar";
 
 
@@ -21,14 +22,15 @@ const App = () => {
 		<Route path={"/(.+)"} render={() =>
 			<>
 				<Navbar />
-				<Container style={{marginTop: "7em"}}>
+				<Container style={{ marginTop: "7em" }}>
 					<Switch>
 						<Route exact path="/activities" component={ActivityDashboard} />
 						<Route path="/activities/:id" component={ActivityDetails} />
 						<Route key={location.key} path={["/createActivity", "/manage/:id"]}
-							component={ActivityForm} />
+							   component={ActivityForm} />
 						<Route path="/errors" component={TestErrors} />
 						<Route path="/server-error" component={ServerError} />
+						<Route path="/login" component={LoginForm} />
 						<Route component={NotFound} />
 					</Switch>
 				</Container>
