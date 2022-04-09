@@ -22,7 +22,7 @@ namespace API.Extensions
 			}).AddEntityFrameworkStores<DataContext>()
 			.AddSignInManager<SignInManager<AppUser>>();
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key thingy! ShhhhhHhH"));
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
 
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 			{
