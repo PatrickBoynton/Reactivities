@@ -1,46 +1,58 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "indent": [
-      2,
-      "tab"
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "linebreak-style": [
-      "error",
-      "windows"
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
     ],
-    "quotes": [
-      "error",
-      "double"
+    "ignorePatterns": [
+        "setupTests.ts",
+        "reportWebVitals.ts",
+        "package.json",
+        "package-lock.json",
+        "README.md",
+        "tsconfig.json",
+        ".eslintrc.json",
+        ".prettierrc",
+        ".prettierignore"
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "no-mixed-spaces-and-tabs": [
-      "error",
-      "smart-tabs"
-    ]
-  }
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "indent": [
+            2,
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-mixed-spaces-and-tabs": [
+            "error",
+            "smart-tabs"
+        ],
+        "no-useless-catch": "off"
+    }
 }
